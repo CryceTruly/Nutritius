@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.happy.nutritius.activities.ActivitySignUp;
+
 public class WelcomeActivity extends AppCompatActivity {
     private Button btn;
     @Override
@@ -17,7 +19,7 @@ btn=findViewById(R.id.ctn);
 btn.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        startActivity(new Intent(getBaseContext(),MapsActivity.class));
+        startActivity(new Intent(getBaseContext(), ActivitySignUp.class));
         finish();
     }
 });
