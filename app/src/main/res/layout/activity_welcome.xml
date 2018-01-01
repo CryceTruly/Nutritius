@@ -60,6 +60,7 @@
             android:textColor="@color/blue_grey_200" />
 
         <EditText
+            android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="-4dp"
@@ -84,6 +85,7 @@
             android:textColor="@color/blue_grey_200" />
 
         <EditText
+            android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="-4dp"
