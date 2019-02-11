@@ -9,14 +9,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.HashMap;
 import java.util.List;
-public class GetNearbyBanksData extends AsyncTask<Object, String, String> {
+public class GetNearbyHospitalData extends AsyncTask<Object, String, String> {
     String googlePlacesData;
     GoogleMap mMap;
     String url;
     @Override
     protected String doInBackground(Object... params) {
         try {
-            Log.d("GetNearbyBanksData", "doInBackground entered");
+            Log.d("GetNearbyHospitalData", "doInBackground entered");
             mMap = (GoogleMap) params[0];
             url = (String) params[1];
             UrlConnection urlConnection = new UrlConnection();
