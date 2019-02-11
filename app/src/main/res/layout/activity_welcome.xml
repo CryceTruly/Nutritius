@@ -101,6 +101,7 @@
             android:layout_height="@dimen/spacing_mxlarge" />
 
         <Button
+            android:id="@+id/ctn"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginLeft="-4dp"
