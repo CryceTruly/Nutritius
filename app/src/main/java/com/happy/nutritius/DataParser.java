@@ -6,8 +6,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import java.util.List;
 public class DataParser {
+    private static final String TAG = "DataParser";
     public List<HashMap<String, String>> parse(String jsonData) {
         JSONArray jsonArray = null;
         JSONObject jsonObject;
@@ -40,18 +42,28 @@ public class DataParser {
     }
     private HashMap<String, String> getPlace(JSONObject googlePlaceJson) {
         HashMap<String, String> googlePlaceMap = new HashMap<String, String>();
+
+        Log.d(TAG, "getPlace: placeobj"+googlePlaceJson);
         String placeName = "-NA-";
         String vicinity = "-NA-";
         String latitude = "";
         String longitude = "";
         String reference = "";
+        String contact="";
+        String openNow="";
         Log.d("getPlace", "Entered");
         try {
             if (!googlePlaceJson.isNull("name")) {
                 placeName = googlePlaceJson.getString("name");
             }
+            if (!googlePlaceJson.isNull("opening_hours")) {
+                openNow = googlePlaceJson.getString("opening_hours");
+            }
             if (!googlePlaceJson.isNull("vicinity")) {
                 vicinity = googlePlaceJson.getString("vicinity");
+            }
+            if (!googlePlaceJson.isNull("contact")) {
+                vicinity = googlePlaceJson.getString("contact");
             }
             latitude =
                     googlePlaceJson.getJSONObject("geometry").getJSONObject("location").getString("lat");
@@ -62,7 +74,10 @@ public class DataParser {
             googlePlaceMap.put("vicinity", vicinity);
             googlePlaceMap.put("lat", latitude);
             googlePlaceMap.put("lng", longitude);
+            googlePlaceMap.put("contact",contact);
             googlePlaceMap.put("reference", reference);
+            googlePlaceMap.put("open", openNow);
+
             Log.d("getPlace", "Putting Places");
         } catch (JSONException e) {
             Log.d("getPlace", "Error");

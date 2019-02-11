@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
     private void initApp() {
         Log.d(TAG, "initApp: initialting");
         mContext=this;
-        if(!loggedIn)
-            startActivity(new Intent(mContext,WelcomeActivity.class));
-        finish();
+//        if(!loggedIn)
+//            startActivity(new Intent(mContext,WelcomeActivity.class));
+//        finish();
     }
 
 }

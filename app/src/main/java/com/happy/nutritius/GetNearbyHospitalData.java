@@ -12,6 +12,7 @@ import java.util.List;
 public class GetNearbyHospitalData extends AsyncTask<Object, String, String> {
     String googlePlacesData;
     GoogleMap mMap;
+    private static final String TAG = "GetNearbyHospitalData";
     String url;
     @Override
     protected String doInBackground(Object... params) {
@@ -29,25 +30,26 @@ public class GetNearbyHospitalData extends AsyncTask<Object, String, String> {
     }
     @Override
     protected void onPostExecute(String result) {
-        Log.d("GooglePlacesReadTask", "onPostExecute Entered");
         List<HashMap<String, String>> nearbyPlacesList = null;
         DataParser dataParser = new DataParser();
         nearbyPlacesList = dataParser.parse(result);
         ShowNearbyPlaces(nearbyPlacesList);
-        Log.d("GooglePlacesReadTask", "onPostExecute Exit");
     }
     private void ShowNearbyPlaces(List<HashMap<String, String>> nearbyPlacesList) {
         for (int i = 0; i < nearbyPlacesList.size(); i++) {
-            Log.d("onPostExecute","Entered into showing locations");
             MarkerOptions markerOptions = new MarkerOptions();
             HashMap<String, String> googlePlace = nearbyPlacesList.get(i);
+            Log.d(TAG, "ShowNearbyPlaces: single "+googlePlace.toString());
             double lat = Double.parseDouble(googlePlace.get("lat"));
             double lng = Double.parseDouble(googlePlace.get("lng"));
             String placeName = googlePlace.get("place_name");
+            String open = googlePlace.get("open");
             String vicinity = googlePlace.get("vicinity");
             LatLng latLng = new LatLng(lat, lng);
             markerOptions.position(latLng);
-            markerOptions.title(placeName + " : " + vicinity);
+            markerOptions.title(placeName);
+            markerOptions.snippet("Address: "+vicinity
+            +"\n OpenNow: "+    Boolean.valueOf(open));
             mMap.addMarker(markerOptions);
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE
                     ));
