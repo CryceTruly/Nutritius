@@ -1,5 +1,5 @@
-{% extends 'users/base.html' %}
-
+{% extends "users/base.html" %}
+{% load crispy_forms_tags%}
 
 {% block body %}
 <div class="row">
@@ -11,24 +11,13 @@
             <div class="card-content">
 <div class="row">
         <span class="card-title">Login to Nutritius</span>
-        <form class="col s12">
+        <form class="col s12" method="POST">
+         {% csrf_token%}
+
+         {{form|crispy}}
          
-          <div class="row">
-            <div class="input-field">
-              <input placeholder="email" id="email" type="email" class="validate">
-              <label for="email">Email</label>
-            </div>
-          
-          </div>
-       
-          <div class="row">
-            <div class="input-field">
-              <input id="password" type="password" class="validate">
-              <label for="password">Password</label>
-            </div>
-          </div>
           <input type="submit" class="btn waves-effect waves-light" name="action">
-               
+               <p>Forgot password <span><a href=""> Recover Account</a></span></p>
               </button>
          
         </form>
