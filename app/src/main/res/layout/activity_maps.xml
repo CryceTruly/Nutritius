@@ -18,7 +18,7 @@
             android:id="@+id/btnBanks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Banks"
+            android:text="HEALTH CENTERS"
             android:background="#009A9A"
             android:textColor="#FFFFFF"
             android:layout_gravity="bottom"/>
