@@ -15,6 +15,7 @@ urlpatterns = [
      path('',include('foods.urls'),name='home'),
      path('profile/', user_views.profile, name='profile'),
      path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+      path('',include('accounts.urls')),
      path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     
 ]

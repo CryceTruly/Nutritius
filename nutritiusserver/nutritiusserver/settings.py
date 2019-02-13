@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
   'users',
   'foods',
-  'crispy_forms'
+  'crispy_forms',
+  'accounts',
+  'knox'
 ]
 
 MIDDLEWARE = [
