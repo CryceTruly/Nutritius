@@ -1,7 +1,9 @@
-package com.happy.nutritius;
+package com.happy.nutritius.activities;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
+
+import com.happy.nutritius.R;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
