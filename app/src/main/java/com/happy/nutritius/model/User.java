@@ -4,7 +4,15 @@ public class User {
     private String user_name,email,password,first_name,last_name,date_joined;
     private int id;
 
-    public User() {
+    public User(int anInt, String string, String sharedPreferencesString) {
+    }
+
+    public User(String user_name, String email, String password, String first_name, String last_name) {
+        this.user_name = user_name;
+        this.email = email;
+        this.password = password;
+        this.first_name = first_name;
+        this.last_name = last_name;
     }
 
     public User(String user_name, String email, String password) {

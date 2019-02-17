@@ -1,4 +1,4 @@
-package com.happy.nutritius;
+package com.happy.nutritius.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.happy.nutritius.R;
 import com.happy.nutritius.activities.ActivitySignUp;
+import com.happy.nutritius.model.Nutrient;
 
 public class WelcomeActivity extends AppCompatActivity {
     private Button btn;
@@ -15,14 +17,7 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-btn=findViewById(R.id.ctn);
-btn.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        startActivity(new Intent(getBaseContext(), ActivitySignUp.class));
-        finish();
-    }
-});
+
 
     }
 

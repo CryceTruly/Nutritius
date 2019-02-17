@@ -25,7 +25,7 @@
     </style>
 
     <style name="Button.Green" parent="@style/Widget.AppCompat.Button.Colored">
-        <item name="colorButtonNormal">@color/light_green_500</item>
+        <item name="colorButtonNormal">@color/colorPrimaryDark</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
 
@@ -134,7 +134,7 @@
     </style>
 
     <style name="Drawer.Custom.Dark" parent="@style/ThemeOverlay.AppCompat.Light">
-        <item name="colorControlHighlight">#26000000</item> 
+        <item name="colorControlHighlight">#26000000</item>
         <item name="listPreferredItemHeightSmall">60dp</item>
     </style>
 
@@ -178,9 +178,9 @@
     </style>
 
     <style name="EditText.Green" parent="@style/AppTheme">
-        <item name="colorControlActivated">@color/green_500</item>
-        <item name="colorControlHighlight">@color/green_500</item>
-        <item name="colorControlNormal">@color/green_400</item>
+        <item name="colorControlActivated">@color/colorPrimaryDark</item>
+        <item name="colorControlHighlight">@color/colorPrimaryDark</item>
+        <item name="colorControlNormal">@color/colorPrimaryDark</item>
     </style>
 
     <style name="CustomTabBottomSheet" parent="Widget.Design.TabLayout">
@@ -203,6 +203,11 @@
         <item name="colorControlActivated">@color/blue_600</item>
         <item name="colorControlHighlight">@color/blue_600</item>
         <item name="colorControlNormal">@color/grey_40</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
 </resources>

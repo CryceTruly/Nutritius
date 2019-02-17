@@ -18,14 +18,12 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.happy.nutritius.MainActivity;
-import com.happy.nutritius.MapsActivity;
 import com.happy.nutritius.R;
 import com.happy.nutritius.api.APIService;
 import com.happy.nutritius.api.Api;
+import com.happy.nutritius.model.Result;
 import com.happy.nutritius.model.User;
 
-import javax.xml.transform.Result;
 
 
 public class ActivitySignUp extends AppCompatActivity implements View.OnClickListener {
@@ -44,8 +42,6 @@ public class ActivitySignUp extends AppCompatActivity implements View.OnClickLis
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-
-        radioGender = (RadioGroup) findViewById(R.id.radioGender);
 
         buttonSignUp.setOnClickListener(this);
     }
@@ -74,7 +70,7 @@ public class ActivitySignUp extends AppCompatActivity implements View.OnClickLis
 
         //building retrofit object
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Api.BASE_URL+"register/")
+                .baseUrl(Api.BASE_URL+"auth/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -88,7 +84,9 @@ public class ActivitySignUp extends AppCompatActivity implements View.OnClickLis
         Call<Result> call = service.createUser(
                 user.getUser_name(),
                 user.getEmail(),
-                user.getPassword()
+                user.getPassword(),
+               "Johua",
+                "Fluke"
         );
 
         //calling the api
@@ -97,10 +95,11 @@ public class ActivitySignUp extends AppCompatActivity implements View.OnClickLis
             public void onResponse(Call<Result> call, Response<Result> response) {
                 //hiding progress dialog
                 progressDialog.dismiss();
-                Log.d(TAG, "onResponse: Registered");
-startActivity(new Intent(getBaseContext(), MapsActivity.class));
-                //displaying the message from the response as toast
-                Toast.makeText(getApplicationContext(), response.body().toString(), Toast.LENGTH_LONG).show();
+                if(!response.isSuccessful()){
+                    return;
+                }
+                Log.d(TAG, "onResponse: Registered"+response);
+                startActivity(new Intent(getBaseContext(), MapsActivity.class));
             }
 
             @Override
