@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         initApp();
+
+        displayFragment(new FoodsFragment(),"Foods","Foods and Nutrients");
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -75,9 +77,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.maps) {
-            // Handle the camera action
-            displayFragment(new MapsFragment(),"Health Centers","Where to get Help");
+//            // Handle the camera action
+//            displayFragment(new MapsFragment(),"Health Centers","Where to get Help");
+            startActivity(new Intent(getBaseContext(),MapsActivity.class));
         } else if (id == R.id.about) {
+
             displayFragment(new AboutFragment(),"About","About App");
 
         } else if (id == R.id.logout) {
