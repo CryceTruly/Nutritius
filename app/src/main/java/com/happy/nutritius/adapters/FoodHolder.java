@@ -16,16 +16,21 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Callback;
 
 public class FoodHolder extends RecyclerView.Adapter<FoodHolder.ItemHolder> {
     private List<Nutrient> nutrients=new ArrayList<>();
     private Context mContext;
     private static final String TAG = "FoodHolder";
-    public FoodHolder(List<Nutrient> nutrients, Context mContext) {
+    private foodClick foodClick;
+    public FoodHolder(List<Nutrient> nutrients, foodClick onFoodListener) {
         this.nutrients = nutrients;
-        this.mContext = mContext;
+        this.foodClick = onFoodListener;
     }
     public FoodHolder() {
+    }
+
+    public FoodHolder(List<Nutrient> foods, Callback<List<Nutrient>> listCallback) {
     }
 
     @NonNull
@@ -33,7 +38,7 @@ public class FoodHolder extends RecyclerView.Adapter<FoodHolder.ItemHolder> {
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.single_food,parent,false);
-        return new ItemHolder(view);
+        return new ItemHolder(view,foodClick);
     }
 
     @Override
@@ -47,15 +52,26 @@ public class FoodHolder extends RecyclerView.Adapter<FoodHolder.ItemHolder> {
         return nutrients.size();
     }
 
-    public static class ItemHolder extends RecyclerView.ViewHolder{
+    public static class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 private TextView name;
+foodClick foodClick;
 
-        public ItemHolder(@NonNull View itemView) {
+        public ItemHolder(@NonNull View itemView,foodClick foodClick) {
             super(itemView);
             name=itemView.findViewById(R.id.name);
+            this.foodClick=foodClick;
+            itemView.setOnClickListener(this);
         }
         public void setName(String name_text){
             name.setText(name_text);
         }
+
+        @Override
+        public void onClick(View v) {
+
+        }
+    }
+    public interface foodClick{
+        void onFoodClick(int position);
     }
 }

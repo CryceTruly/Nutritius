@@ -1,6 +1,7 @@
 package com.happy.nutritius.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -22,21 +23,24 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.happy.nutritius.R;
+import com.happy.nutritius.activities.FoodDetailActivity;
 import com.happy.nutritius.adapters.FoodHolder;
 import com.happy.nutritius.api.APIService;
 import com.happy.nutritius.api.Api;
 import com.happy.nutritius.model.Nutrient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FoodsFragment extends Fragment {
+public class FoodsFragment extends Fragment implements FoodHolder.foodClick{
 private RecyclerView results;
     private static final String TAG = "FoodsFragment";
 private TextView textViewResult;
 private ProgressBar progressBar;
+   private List<Nutrient> foods=new ArrayList<>();
     LinearLayout linearLayout;
     public FoodsFragment() {
         // Required empty public constructor
@@ -80,9 +84,11 @@ results.setAdapter(holder);
                     textViewResult.setText(response.message());
                     return;
                 }
+                for (Nutrient nutrient:response.body()){
+                    foods.add(nutrient);
+                }
 
-                List<Nutrient> posts = response.body();
-                results.setAdapter(new FoodHolder(posts,getContext()));
+                results.setAdapter(new FoodHolder(foods,this));
 
               progressBar.setVisibility(View.GONE);
               linearLayout.setVisibility(View.GONE);
@@ -100,6 +106,13 @@ results.setAdapter(holder);
         });
 
 return view;
+    }
+    @Override
+    public void onFoodClick(int position) {
+        Intent intent=new Intent(getContext(), FoodDetailActivity.class);
+        intent.putExtra("food",foods.get(position));
+        startActivity(intent);
+
     }
 
 }

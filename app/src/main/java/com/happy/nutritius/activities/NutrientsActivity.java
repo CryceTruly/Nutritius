@@ -7,18 +7,20 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
 import com.happy.nutritius.R;
+import com.happy.nutritius.adapters.FoodHolder;
 import com.happy.nutritius.api.APIService;
 import com.happy.nutritius.api.Api;
 import com.happy.nutritius.model.Nutrient;
 
 import java.util.List;
 
-public class NutrientsActivity extends AppCompatActivity {
+public class NutrientsActivity extends AppCompatActivity implements FoodHolder.foodClick {
 TextView textViewResult;
     private static final String TAG = "NutrientsActivity";
     @Override
@@ -70,4 +72,10 @@ TextView textViewResult;
 
 
         }
+
+
+    @Override
+    public void onFoodClick(int position) {
+
+    }
 }
