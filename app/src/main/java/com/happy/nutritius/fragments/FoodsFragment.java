@@ -35,7 +35,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FoodsFragment extends Fragment implements FoodHolder.foodClick{
+public class FoodsFragment extends Fragment{
 private RecyclerView results;
     private static final String TAG = "FoodsFragment";
 private TextView textViewResult;
@@ -59,7 +59,8 @@ private ProgressBar progressBar;
         linearLayout=view.findViewById(R.id.lyt_no_connection);
         results.setLayoutManager(new LinearLayoutManager(getActivity()));
         progressBar=view.findViewById(R.id.progress_bar1);
-final FoodHolder holder=new FoodHolder();
+
+        FoodHolder holder=new FoodHolder();
 results.setAdapter(holder);
 
         //building retrofit object
@@ -84,12 +85,9 @@ results.setAdapter(holder);
                     textViewResult.setText(response.message());
                     return;
                 }
-                for (Nutrient nutrient:response.body()){
-                    foods.add(nutrient);
-                }
+                foods.addAll(response.body());
 
-                results.setAdapter(new FoodHolder(foods,this));
-
+                results.setAdapter(new FoodHolder(foods,getContext()));
               progressBar.setVisibility(View.GONE);
               linearLayout.setVisibility(View.GONE);
             }
@@ -107,12 +105,6 @@ results.setAdapter(holder);
 
 return view;
     }
-    @Override
-    public void onFoodClick(int position) {
-        Intent intent=new Intent(getContext(), FoodDetailActivity.class);
-        intent.putExtra("food",foods.get(position));
-        startActivity(intent);
 
-    }
 
 }

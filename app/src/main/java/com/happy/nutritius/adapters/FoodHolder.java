@@ -1,6 +1,7 @@
 package com.happy.nutritius.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.print.PrinterId;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.happy.nutritius.R;
+import com.happy.nutritius.activities.FoodDetailActivity;
 import com.happy.nutritius.model.Nutrient;
 
 import java.util.ArrayList;
@@ -22,15 +24,13 @@ public class FoodHolder extends RecyclerView.Adapter<FoodHolder.ItemHolder> {
     private List<Nutrient> nutrients=new ArrayList<>();
     private Context mContext;
     private static final String TAG = "FoodHolder";
-    private foodClick foodClick;
-    public FoodHolder(List<Nutrient> nutrients, foodClick onFoodListener) {
+
+    public FoodHolder(List<Nutrient> nutrients,Context mContext) {
         this.nutrients = nutrients;
-        this.foodClick = onFoodListener;
+        this.mContext=mContext;
+
     }
     public FoodHolder() {
-    }
-
-    public FoodHolder(List<Nutrient> foods, Callback<List<Nutrient>> listCallback) {
     }
 
     @NonNull
@@ -38,13 +38,21 @@ public class FoodHolder extends RecyclerView.Adapter<FoodHolder.ItemHolder> {
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.single_food,parent,false);
-        return new ItemHolder(view,foodClick);
+        return new ItemHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ItemHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: "+nutrients.get(position));
         holder.setName(nutrients.get(position).getName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(mContext, FoodDetailActivity.class);
+                i.putExtra("food",nutrients.get(position));
+                mContext.startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -53,25 +61,22 @@ public class FoodHolder extends RecyclerView.Adapter<FoodHolder.ItemHolder> {
     }
 
     public static class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-private TextView name;
-foodClick foodClick;
+    private TextView name;
 
-        public ItemHolder(@NonNull View itemView,foodClick foodClick) {
+
+        public ItemHolder(@NonNull View itemView) {
             super(itemView);
             name=itemView.findViewById(R.id.name);
-            this.foodClick=foodClick;
             itemView.setOnClickListener(this);
         }
         public void setName(String name_text){
             name.setText(name_text);
         }
 
+
         @Override
         public void onClick(View v) {
 
         }
-    }
-    public interface foodClick{
-        void onFoodClick(int position);
     }
 }
