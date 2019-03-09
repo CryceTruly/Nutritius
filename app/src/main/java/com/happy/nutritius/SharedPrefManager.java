@@ -7,15 +7,12 @@ import com.happy.nutritius.model.User;
 
 public class SharedPrefManager {
 
-    private static SharedPrefManager mInstance;
-    private static Context mCtx;
-
-    private static final String SHARED_PREF_NAME = "simplifiedcodingsharedprefretrofit";
-
+    public static SharedPrefManager mInstance;
+    public static Context mCtx;
+    private static final String SHARED_PREF_NAME = "HAPPY_PREFS";
     private static final String KEY_USER_ID = "keyuserid";
     private static final String KEY_USER_NAME = "keyusername";
     private static final String KEY_USER_EMAIL = "keyuseremail";
-    private static final String KEY_USER_GENDER = "keyusergender";
 
     private SharedPrefManager(Context context) {
         mCtx = context;
@@ -31,9 +28,9 @@ public class SharedPrefManager {
     public boolean userLogin(User user) {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(KEY_USER_ID, user.getId());
         editor.putString(KEY_USER_NAME, user.getUser_name());
         editor.putString(KEY_USER_EMAIL, user.getEmail());
+        editor.putBoolean("isLoggedIn",true);
         editor.apply();
         return true;
     }
@@ -54,8 +51,8 @@ public class SharedPrefManager {
         );
     }
 
-    public boolean logout() {
-        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+    public static boolean logoutUser(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
