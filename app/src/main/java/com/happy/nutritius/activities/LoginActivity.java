@@ -101,12 +101,15 @@ forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onResponse(Call<Result> call, Response<Result> response) {
                 progressDialog.dismiss();
-                Log.d(TAG, "onResponse: "+response);
+
                 if (response.isSuccessful()) {
-                    finish();
+                    User user=response.body().getUser();
                     SharedPrefManager.getInstance(getApplicationContext()).userLogin(new User
-                            ("hello","h@T.C","PASSWORD"));
-                    startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                            (user.getUser_name(),user.getEmail(),user.getPassword()));
+
+
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_LONG).show();
                 }

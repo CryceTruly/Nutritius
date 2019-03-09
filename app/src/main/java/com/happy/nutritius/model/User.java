@@ -1,14 +1,14 @@
 package com.happy.nutritius.model;
 
 public class User {
-    private String user_name,email,password,first_name,last_name,date_joined;
+    private String username,email,password,first_name,last_name,date_joined;
     private int id;
 
     public User(int anInt, String string, String sharedPreferencesString) {
     }
 
     public User(String user_name, String email, String password, String first_name, String last_name) {
-        this.user_name = user_name;
+        this.username = user_name;
         this.email = email;
         this.password = password;
         this.first_name = first_name;
@@ -16,17 +16,17 @@ public class User {
     }
 
     public User(String user_name, String email, String password) {
-        this.user_name = user_name;
+        this.username = user_name;
         this.email = email;
         this.password = password;
     }
 
     public String getUser_name() {
-        return user_name;
+        return username;
     }
 
     public void setUser_name(String user_name) {
-        this.user_name = user_name;
+        this.username = user_name;
     }
 
     public String getEmail() {
@@ -80,7 +80,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "user_name='" + user_name + '\'' +
+                "user_name='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", first_name='" + first_name + '\'' +
