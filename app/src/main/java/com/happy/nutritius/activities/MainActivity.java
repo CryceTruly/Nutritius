@@ -15,6 +15,7 @@ import com.happy.nutritius.R;
 import com.happy.nutritius.SharedPrefManager;
 import com.happy.nutritius.fragments.AboutFragment;
 import com.happy.nutritius.fragments.FoodsFragment;
+import com.happy.nutritius.fragments.FoodsToAvoidFragment;
 import com.happy.nutritius.fragments.LogoutFragment;
 import com.happy.nutritius.fragments.MapsFragment;
 
@@ -46,7 +47,10 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         initApp();
+
+        displayFragment(new FoodsFragment(),"Foods","Foods and Nutrients");
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -75,9 +79,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.maps) {
-            // Handle the camera action
-            displayFragment(new MapsFragment(),"Health Centers","Where to get Help");
+//            // Handle the camera action
+//            displayFragment(new MapsFragment(),"Health Centers","Where to get Help");
+            startActivity(new Intent(getBaseContext(),MapsActivity.class));
         } else if (id == R.id.about) {
+
             displayFragment(new AboutFragment(),"About","About App");
 
         } else if (id == R.id.logout) {
@@ -85,7 +91,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.foods) {
 
             displayFragment(new FoodsFragment(),"Foods","Foods and Nutrients");
-        }
+        
+    } else if (id == R.id.foodstoavoid) {
+        displayFragment(new FoodsToAvoidFragment(),"FoodsToAvoid","Please avoid these");
+    }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -108,5 +117,6 @@ public class MainActivity extends AppCompatActivity
         main=findViewById(R.id.main);
         if(!SharedPrefManager.isLoggedIn(mContext))
             startActivity(new Intent(mContext,LoginActivity.class));
+
     }
 }

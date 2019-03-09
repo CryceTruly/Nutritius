@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.happy.nutritius">
 
     <dist:module dist:instant="true" />
@@ -15,16 +16,17 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activities.FoodDetailActivity"></activity>
         <activity
             android:name=".activities.MainActivity"
             android:label="Nutritius"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN">
+                <action android:name="android.intent.action.MAIN"></action>
 
-                </action>
-                <category android:name="android.intent.category.LAUNCHER"></category>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".activities.ForgotPasswordActivity" />
@@ -37,7 +39,6 @@
 
         <activity android:name=".activities.MapsActivity" />
         <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.WelcomeActivity"></activity>
         <activity android:name=".activities.UsersActivity" />
 
         <meta-data

@@ -1,5 +1,6 @@
 package com.happy.nutritius.api;
 
+import com.happy.nutritius.model.Food;
 import com.happy.nutritius.model.Nutrient;
 import com.happy.nutritius.model.Result;
 
@@ -28,5 +29,8 @@ public interface APIService {
     );
     @GET("nutrients")
     Call<List<Nutrient>> getNutrients();
+
+    @GET("foodstoavoid")
+    Call<List<Food>> getFoodToAvoid();
 
 }

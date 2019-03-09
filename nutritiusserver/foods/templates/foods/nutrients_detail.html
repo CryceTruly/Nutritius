@@ -1,0 +1,36 @@
+{% extends 'users/base.html' %}
+{% block body %}
+<div class="container">
+
+    <span style="font-size:26px;padding: 20px;">Food Details</span>
+    <a href="{% url 'del-food' object.id %}"> <i class="material-icons right-align">delete</i></a>
+
+    <hr>
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card" style="min-height: 300px;">
+                <div class="card-content">
+                    <span class="card-title">{{object.name}}</span>
+                    <p>{{object.description}}</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col s12 m6">
+            <div class="card" style="min-height: 300px;">
+                <div class="card-content">
+                    <span class="card-title">Nutrients</span>
+                    <ul class="collection">
+                        <li>{{object.nutrients}}</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}

@@ -1,6 +1,7 @@
 package com.happy.nutritius.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -22,21 +23,24 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.happy.nutritius.R;
+import com.happy.nutritius.activities.FoodDetailActivity;
 import com.happy.nutritius.adapters.FoodHolder;
 import com.happy.nutritius.api.APIService;
 import com.happy.nutritius.api.Api;
 import com.happy.nutritius.model.Nutrient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FoodsFragment extends Fragment {
+public class FoodsFragment extends Fragment{
 private RecyclerView results;
     private static final String TAG = "FoodsFragment";
 private TextView textViewResult;
 private ProgressBar progressBar;
+   private List<Nutrient> foods=new ArrayList<>();
     LinearLayout linearLayout;
     public FoodsFragment() {
         // Required empty public constructor
@@ -55,7 +59,8 @@ private ProgressBar progressBar;
         linearLayout=view.findViewById(R.id.lyt_no_connection);
         results.setLayoutManager(new LinearLayoutManager(getActivity()));
         progressBar=view.findViewById(R.id.progress_bar1);
-final FoodHolder holder=new FoodHolder();
+
+        FoodHolder holder=new FoodHolder();
 results.setAdapter(holder);
 
         //building retrofit object
@@ -80,10 +85,9 @@ results.setAdapter(holder);
                     textViewResult.setText(response.message());
                     return;
                 }
+                foods.addAll(response.body());
 
-                List<Nutrient> posts = response.body();
-                results.setAdapter(new FoodHolder(posts,getContext()));
-
+                results.setAdapter(new FoodHolder(foods,getContext()));
               progressBar.setVisibility(View.GONE);
               linearLayout.setVisibility(View.GONE);
             }
@@ -101,5 +105,6 @@ results.setAdapter(holder);
 
 return view;
     }
+
 
 }
