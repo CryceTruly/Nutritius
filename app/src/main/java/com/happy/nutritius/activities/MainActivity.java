@@ -117,6 +117,6 @@ public class MainActivity extends AppCompatActivity
         main=findViewById(R.id.main);
         if(!SharedPrefManager.isLoggedIn(mContext))
             startActivity(new Intent(mContext,LoginActivity.class));
-        finish();
+
     }
 }

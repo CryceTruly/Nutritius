@@ -54,4 +54,12 @@ public class Food implements Parcelable {
     public void setReason(String reason) {
         this.reason = reason;
     }
+
+    @Override
+    public String toString() {
+        return "Food{" +
+                "name='" + name + '\'' +
+                ", reason='" + reason + '\'' +
+                '}';
+    }
 }
