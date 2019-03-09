@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -22,6 +23,7 @@ private Toolbar toolbar;
 private ListView nutrients;
 private TextView name,description;
 private List nutrientsList=new ArrayList();
+    private static final String TAG = "FoodDetailActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +35,7 @@ private List nutrientsList=new ArrayList();
         nutrients=findViewById(R.id.nutrrients);        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
+        Log.d(TAG, "checks onCreate: "+getIntent().getStringExtra("from"));
         if(getIntent().hasExtra("food")){
             nutrient=getIntent().getParcelableExtra("food");
             name.setText(nutrient.getName());

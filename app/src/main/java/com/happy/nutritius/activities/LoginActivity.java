@@ -9,15 +9,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.happy.nutritius.R;
 import com.happy.nutritius.SharedPrefManager;
 import com.happy.nutritius.api.APIService;
 import com.happy.nutritius.api.Api;
 import com.happy.nutritius.model.Result;
 import com.happy.nutritius.model.User;
+import com.happy.nutritius.utils.Helper;
 
 
 import retrofit2.Call;
@@ -31,6 +34,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText editTextEmail, editTextPassword;
     private Button buttonSignIn;
     TextView create,forgot;
+    LinearLayout view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +43,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-
+        view=findViewById(R.id.sign_up_for_account);
         buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
 create=findViewById(R.id.create);
 forgot=findViewById(R.id.forgot);
+Helper.setSystemBarColor(this,R.color.grey_5);
+
+
+
+
 create.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
@@ -60,13 +69,24 @@ forgot.setOnClickListener(new View.OnClickListener() {
     }
 
     private void userSignIn() {
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Signing Up...");
-        progressDialog.show();
-
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
+        if(email.trim().length()<1){
+            Snackbar.make(view,"Username is required",Snackbar.LENGTH_LONG).show();
+            return ;
+        }
+        if(password.trim().length()<0){
+            Snackbar.make(view,"password is required",Snackbar.LENGTH_LONG).show();
+            return ;
+        }
+        if(password.trim().length()<5){
+            Snackbar.make(view,"password should be atleast 6 characters long",Snackbar.LENGTH_LONG).show();
+            return ;
+        }
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Signing you in...");
+        progressDialog.show();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Api.BASE_URL+"auth/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -88,7 +108,7 @@ forgot.setOnClickListener(new View.OnClickListener() {
                             ("hello","h@T.C","PASSWORD"));
                     startActivity(new Intent(getApplicationContext(), MapsActivity.class));
                 } else {
-                    Toast.makeText(getApplicationContext(), "Invalid email or password", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -105,5 +125,8 @@ forgot.setOnClickListener(new View.OnClickListener() {
         if (view == buttonSignIn) {
             userSignIn();
         }
+    }
+    public void goToSignUp(View view){
+        startActivity(new Intent(getBaseContext(),ActivitySignUp.class));
     }
 }

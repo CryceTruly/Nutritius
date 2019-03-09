@@ -25,7 +25,7 @@ public class FoodHolder extends RecyclerView.Adapter<FoodHolder.ItemHolder> {
     private Context mContext;
     private static final String TAG = "FoodHolder";
 
-    public FoodHolder(List<Nutrient> nutrients,Context mContext) {
+    public FoodHolder(List nutrients,Context mContext) {
         this.nutrients = nutrients;
         this.mContext=mContext;
 
@@ -50,6 +50,7 @@ public class FoodHolder extends RecyclerView.Adapter<FoodHolder.ItemHolder> {
             public void onClick(View v) {
                 Intent i=new Intent(mContext, FoodDetailActivity.class);
                 i.putExtra("food",nutrients.get(position));
+                i.putExtra("from",mContext.getPackageName());
                 mContext.startActivity(i);
             }
         });
