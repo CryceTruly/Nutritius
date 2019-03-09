@@ -46,8 +46,8 @@ private ProgressBar progressBar;
         super.onStart();
 
         List items=new ArrayList();
-        items.add("An application to guide with nutrition");
-        items.add("Version"+ BuildConfig.VERSION_CODE);
+        items.add("An application to guide with nutrition of children");
+        items.add("Version "+ BuildConfig.VERSION_CODE);
 
         listView.setAdapter(new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1,items));
         progressBar.setVisibility(View.GONE);
