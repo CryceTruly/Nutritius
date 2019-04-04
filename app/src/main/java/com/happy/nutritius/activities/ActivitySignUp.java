@@ -42,12 +42,12 @@ public class ActivitySignUp extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        buttonSignUp = (Button) findViewById(R.id.signup);
+        buttonSignUp = findViewById(R.id.signup);
         layout=findViewById(R.id.lay);
-        editTextName = (EditText) findViewById(R.id.editTextName);
-        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
-        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        editTextPassword2 = (EditText) findViewById(R.id.editTextPassword2);
+        editTextName = findViewById(R.id.editTextName);
+        editTextEmail = findViewById(R.id.editTextEmail);
+        editTextPassword = findViewById(R.id.editTextPassword);
+        editTextPassword2 = findViewById(R.id.editTextPassword2);
         Helper.setSystemBarColor(this,R.color.grey_5);
         buttonSignUp.setOnClickListener(this);
     }
@@ -134,8 +134,9 @@ if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                     Snackbar.make(layout,response.message(),Snackbar.LENGTH_LONG).show();
                     return;
                 }
-                Toast.makeText(ActivitySignUp.this, "Account created,you can now login", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ActivitySignUp.this, "Account created,you can now login", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(getBaseContext(), LoginActivity.class));
+                finish();
             }
 
             @Override
