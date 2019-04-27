@@ -106,8 +106,6 @@ forgot.setOnClickListener(new View.OnClickListener() {
                     User user=response.body().getUser();
                     SharedPrefManager.getInstance(getApplicationContext()).userLogin(new User
                             (user.getUser_name(),user.getEmail(),user.getPassword()));
-
-
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 } else {

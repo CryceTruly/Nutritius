@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 
@@ -19,6 +20,8 @@ import com.happy.nutritius.fragments.FoodsFragment;
 import com.happy.nutritius.fragments.FoodsToAvoidFragment;
 import com.happy.nutritius.fragments.LogoutFragment;
 import com.happy.nutritius.fragments.MapsFragment;
+import com.happy.nutritius.utils.ForegroundCheckTask;
+import com.happy.nutritius.utils.Helper;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
@@ -33,6 +36,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -63,6 +69,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+
     }
 
     @Override
@@ -126,7 +136,13 @@ public class MainActivity extends AppCompatActivity
            startActivity(new Intent(mContext,LoginActivity.class));
            finish();
        }
-        
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        Toast.makeText(mContext, "Your session ended", Toast.LENGTH_LONG).show();
+        SharedPrefManager.logoutUser(getBaseContext());
+        super.onDestroy();
     }
 }

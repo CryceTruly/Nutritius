@@ -8,10 +8,13 @@ public class Result {
 
     @SerializedName("user")
     private User user;
+    @SerializedName("message")
+    private String message;
 
-    public Result(String token, User user) {
+    public Result(String token, User user,String message) {
         this.token = token;
         this.user = user;
+        this.message=message;
     }
 
     public Result() {
@@ -19,6 +22,9 @@ public class Result {
 
     public String getToken() {
         return token;
+    }
+    public String getMessage(){
+        return message;
     }
 
     public void setToken(String token) {
@@ -38,6 +44,7 @@ public class Result {
         return "Result{" +
                 "token='" + token + '\'' +
                 ", user=" + user +
+                ", message='" + message + '\'' +
                 '}';
     }
 }

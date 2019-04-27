@@ -15,7 +15,6 @@ class Nutrients(models.Model):
         return self.name+" "+self.nutrients
 
 
-
 class FoodsToAvoid(models.Model):
     name = models.CharField(max_length=255)
     reason = models.CharField(max_length=500)
