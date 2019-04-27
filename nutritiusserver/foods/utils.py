@@ -4,7 +4,6 @@ from django.core.mail import EmailMessage
 
 class Utils:
     """Utility class that contains helper function"""
-
     @staticmethod
     def send_email(data):
         """This function sends email to users."""

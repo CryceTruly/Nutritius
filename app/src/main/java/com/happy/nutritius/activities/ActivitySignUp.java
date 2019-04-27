@@ -29,6 +29,8 @@ import com.happy.nutritius.model.Result;
 import com.happy.nutritius.model.User;
 import com.happy.nutritius.utils.Helper;
 
+import java.io.IOException;
+
 
 public class ActivitySignUp extends AppCompatActivity implements View.OnClickListener {
 
@@ -93,7 +95,11 @@ if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
 
 
         if(!password.equals(password2)){
+
             Snackbar.make(layout,"Passwords donot match",Snackbar.LENGTH_SHORT).show();
+            return;
+        }else if(password.length()<6 || password.length()>16){
+            Snackbar.make(layout,"Passwords should be 6 to 16 characters long",Snackbar.LENGTH_SHORT).show();
             return;
         }
 
@@ -130,13 +136,22 @@ if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             public void onResponse(Call<Result> call, Response<Result> response) {
                 //hiding progress dialog
                 progressDialog.dismiss();
-                if(!response.isSuccessful()){
-                    Snackbar.make(layout,response.message(),Snackbar.LENGTH_LONG).show();
-                    return;
+                Log.d(TAG, "onResponse: "+response.message());
+                if (response.code() == 400) {
+                    try {
+                        String err = response.errorBody().string();
+                        Snackbar.make(layout, err.split(":")[1].replaceAll("\"","").replace("}",""), Snackbar.LENGTH_LONG).show();
+                        return;
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else if(response.code()==200){
+                    Toast.makeText(ActivitySignUp.this, "Account created,you can now login", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getBaseContext(), LoginActivity.class));
+                    finish();
                 }
-                Toast.makeText(ActivitySignUp.this, "Account created,you can now login", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getBaseContext(), LoginActivity.class));
-                finish();
+
             }
 
             @Override

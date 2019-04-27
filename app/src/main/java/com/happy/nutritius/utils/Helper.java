@@ -1,11 +1,16 @@
 package com.happy.nutritius.utils;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import java.util.List;
 
 import androidx.annotation.ColorRes;
 
@@ -28,7 +33,9 @@ public class Helper {
             view.setSystemUiVisibility(flags);
         }
     }
-    public  static boolean isValidEmail(CharSequence target) {
+
+    public static boolean isValidEmail(CharSequence target) {
         return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
+
 }
