@@ -12,6 +12,11 @@
             android:id="@+id/foodstoavoid"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Foods to avoid" />
+
+        <item
+            android:id="@+id/search_google"
+            android:icon="@drawable/ic_search"
+            android:title="search" />
         <item
             android:id="@+id/maps"
             android:icon="@drawable/ic_hospital"
