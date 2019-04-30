@@ -23,6 +23,7 @@ private Toolbar toolbar;
 private ListView nutrients;
 private TextView name,description;
 private List nutrientsList=new ArrayList();
+private TextView recommended;
     private static final String TAG = "FoodDetailActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,9 @@ private List nutrientsList=new ArrayList();
         name=findViewById(R.id.name);
         description=findViewById(R.id.desc);
         toolbar=findViewById(R.id.toolbar);
-        nutrients=findViewById(R.id.nutrrients);        setSupportActionBar(toolbar);
+        nutrients=findViewById(R.id.nutrrients);
+        recommended=findViewById(R.id.recommended);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Log.d(TAG, "checks onCreate: "+getIntent().getStringExtra("from"));
@@ -40,12 +43,8 @@ private List nutrientsList=new ArrayList();
             nutrient=getIntent().getParcelableExtra("food");
             name.setText(nutrient.getName());
             description.setText(nutrient.getDescription());
-
+            recommended.setText("Recommended for age "+nutrient.getAgegroup());
             nutrients.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getNutrients(nutrient.getNutrients())));
-
-
-
-
         }else{
             name.setText("Something went wrong");
         }

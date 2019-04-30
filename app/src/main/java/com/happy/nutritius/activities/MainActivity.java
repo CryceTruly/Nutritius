@@ -18,6 +18,7 @@ import com.happy.nutritius.SharedPrefManager;
 import com.happy.nutritius.fragments.AboutFragment;
 import com.happy.nutritius.fragments.FoodsFragment;
 import com.happy.nutritius.fragments.FoodsToAvoidFragment;
+import com.happy.nutritius.fragments.GoogleSearchFragment;
 import com.happy.nutritius.fragments.LogoutFragment;
 import com.happy.nutritius.fragments.MapsFragment;
 import com.happy.nutritius.utils.ForegroundCheckTask;
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity
 
         initApp();
 
-        displayFragment(new FoodsFragment(),"Foods","Foods and Nutrients");
+        displayFragment(new FoodsFragment(),"Foods","Recommended Foods and Nutrients");
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -103,10 +104,13 @@ public class MainActivity extends AppCompatActivity
             displayFragment(new LogoutFragment(),"Auth","Logout");
         } else if (id == R.id.foods) {
 
-            displayFragment(new FoodsFragment(),"Foods","Foods and Nutrients");
+            displayFragment(new FoodsFragment(),"Foods","Recommended Foods and Nutrients");
         
     } else if (id == R.id.foodstoavoid) {
         displayFragment(new FoodsToAvoidFragment(),"FoodsToAvoid","Please avoid these");
+
+    } else if (id == R.id.search_google) {
+        displayFragment(new GoogleSearchFragment(),"Search the web","Access the web");
     }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
