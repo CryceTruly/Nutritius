@@ -63,7 +63,6 @@ class NutrientsDetail(APIView):
     def get(self, request, pk):
         nutrients = get_object_or_404(Nutrients, pk=pk)
         data = NutrientsSerializer(nutrients).data
-
         return Response(data)
 
 
@@ -113,7 +112,6 @@ class FoodToAvoidView(APIView):
 class FoodToAvoidDelete(LoginRequiredMixin, DeleteView):
     model = FoodsToAvoid
     success_url = '/'
-
 
 class FoodsToAvoidSiteView(LoginRequiredMixin, ListView):
     model = FoodsToAvoid
