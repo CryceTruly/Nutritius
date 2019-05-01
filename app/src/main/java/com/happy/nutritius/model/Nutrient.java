@@ -5,15 +5,16 @@ import android.os.Parcelable;
 
 public class Nutrient implements Parcelable {
     private int id;
-    private String name,description,nutrients;
+    private String name,description,nutrients,agegroup;
 
     public Nutrient() {
     }
 
-    public Nutrient(int id, String name, String description, String nutrients) {
+    public Nutrient(int id, String name, String description, String nutrients,String agegroup) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.agegroup=agegroup;
         this.nutrients = nutrients;
     }
 
@@ -22,6 +23,7 @@ public class Nutrient implements Parcelable {
         name = in.readString();
         description = in.readString();
         nutrients = in.readString();
+        agegroup=in.readString();
     }
 
     @Override
@@ -30,6 +32,7 @@ public class Nutrient implements Parcelable {
         dest.writeString(name);
         dest.writeString(description);
         dest.writeString(nutrients);
+        dest.writeString(agegroup);
     }
 
     @Override
@@ -55,6 +58,14 @@ public class Nutrient implements Parcelable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getAgegroup() {
+        return agegroup;
+    }
+
+    public void setAgegroup(String agegroup) {
+        this.agegroup = agegroup;
     }
 
     public String getName() {
@@ -88,6 +99,7 @@ public class Nutrient implements Parcelable {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", nutrients='" + nutrients + '\'' +
+                ", agegroup='" + agegroup + '\'' +
                 '}';
     }
 }
